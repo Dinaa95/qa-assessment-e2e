@@ -1,26 +1,35 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+import { quickQuoteLanding, cookiePopupTexts, cookiePopupElements } from '../support/page_objects'
 
+/////////////COOKIES//////////////////
+Cypress.Commands.add('cookiePopup', () => {
+    cy.get(cookiePopupElements.mainCookiePopup).should('be.visible');
+    cy.get(cookiePopupElements.mainCookieText).should('contain', cookiePopupTexts.cookieText);
+});
+
+Cypress.Commands.add('customizeCookies', () => {
+    //click on customize cookies
+    cy.get('.cky-btn-customize').click()
+
+    //assert that custom cookie popup appeared
+    cy.get('.cky-preference-center').should('be.visible')
+    cy.get('.cky-preference-title').should('contain', cookiePopupTexts.customCookieText)
+
+    //choose some of the settings and save
+    cy.get('#ckySwitchfunctional, #ckySwitchperformance, #ckySwitchadvertisement').check()
+    cy.get('.cky-btn-preferences').click()
+    cy.get('.cky-preference-center').should('be.not.visible')
+})
+
+Cypress.Commands.add('verifyCustsomizedCookies', () => {
+    //check if the preferences were really saved & checked
+    cy.get('.cky-btn-revisit-wrapper').click()
+    cy.get('#ckySwitchfunctional, #ckySwitchperformance, #ckySwitchadvertisement').should('be.checked')
+
+    //assert that others are not checked
+    cy.get('#ckySwitchanalytics, #ckySwitchother').should('not.be.checked')
+})
+
+/////////////CAR PAGE/////////////
+Cypress.Commands.add('checkMainpage', () => {
+    cy.title().should('eq', quickQuoteLanding.pageTitle)
+})
