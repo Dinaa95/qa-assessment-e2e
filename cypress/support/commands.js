@@ -1,35 +1,69 @@
-import { quickQuoteLanding, cookiePopupTexts, cookiePopupElements } from '../support/page_objects'
+import { basicPageElements, cookiePopupElements, cookiePopupTexts } from '../support/page_objects'
+import { inputData } from '../support/input_data'
 
-/////////////COOKIES//////////////////
+
+Cypress.Commands.add('checkMainpage', () => {
+    cy.title().should('eq', basicPageElements.pageTitle)
+})
+
+////////////////////////////////////COOKIES//////////////////////////////////////////
 Cypress.Commands.add('cookiePopup', () => {
-    cy.get(cookiePopupElements.mainCookiePopup).should('be.visible');
-    cy.get(cookiePopupElements.mainCookieText).should('contain', cookiePopupTexts.cookieText);
+    cy.get(cookiePopupElements.mainCookiePopup).should('be.visible')
+    cy.get(cookiePopupElements.mainCookieText).should('contain', cookiePopupTexts.cookieText)
 });
+
+Cypress.Commands.add('acceptCookies', () => {
+    cy.get(cookiePopupElements.allowAllButton).click()
+})
+
+Cypress.Commands.add('verifyAcceptedCookies', () => {
+    //revisit cookie settings and check if everything is marked
+    cy.get(basicPageElements.cookieRevisitButton).click()
+    cy.get(cookiePopupElements.functionalSwitch).should('be.checked')
+    cy.get(cookiePopupElements.performanceSwitch).should('be.checked')
+    cy.get(cookiePopupElements.advertisementSwitch).should('be.checked')
+    cy.get(cookiePopupElements.analyticsSwitch).should('be.checked')
+    cy.get(cookiePopupElements.otherSwitch).should('be.checked')
+})
+
+Cypress.Commands.add('rejectCookies', () => {
+    cy.get(cookiePopupElements.rejectAllButton).click()
+})
+
+Cypress.Commands.add('verifyRejectedCookies', () => {
+    //revisit cookie settings and check if nothing marked
+    cy.get(basicPageElements.cookieRevisitButton).click()
+    cy.get(cookiePopupElements.functionalSwitch).should('not.be.checked')
+    cy.get(cookiePopupElements.performanceSwitch).should('not.be.checked')
+    cy.get(cookiePopupElements.advertisementSwitch).should('not.be.checked')
+    cy.get(cookiePopupElements.analyticsSwitch).should('not.be.checked')
+    cy.get(cookiePopupElements.otherSwitch).should('not.be.checked')
+})
 
 Cypress.Commands.add('customizeCookies', () => {
     //click on customize cookies
-    cy.get('.cky-btn-customize').click()
-
+    cy.get(cookiePopupElements.customizeButton).click()
     //assert that custom cookie popup appeared
-    cy.get('.cky-preference-center').should('be.visible')
-    cy.get('.cky-preference-title').should('contain', cookiePopupTexts.customCookieText)
-
+    cy.get(cookiePopupElements.customCookiePopup).should('be.visible')
+    cy.get(cookiePopupElements.customCookieText).should('contain', cookiePopupTexts.customCookieText)
     //choose some of the settings and save
-    cy.get('#ckySwitchfunctional, #ckySwitchperformance, #ckySwitchadvertisement').check()
-    cy.get('.cky-btn-preferences').click()
-    cy.get('.cky-preference-center').should('be.not.visible')
+    cy.get(`${cookiePopupElements.functionalSwitch}, ${cookiePopupElements.performanceSwitch}, ${cookiePopupElements.advertisementSwitch}`).check()
+    cy.get(cookiePopupElements.savePreferencesButton).click()
+    cy.get(cookiePopupElements.customCookiePopup).should('be.not.visible')
 })
 
 Cypress.Commands.add('verifyCustsomizedCookies', () => {
     //check if the preferences were really saved & checked
-    cy.get('.cky-btn-revisit-wrapper').click()
-    cy.get('#ckySwitchfunctional, #ckySwitchperformance, #ckySwitchadvertisement').should('be.checked')
-
+    cy.get(basicPageElements.cookieRevisitButton).click()
+    cy.get(cookiePopupElements.functionalSwitch).should('be.checked')
+    cy.get(cookiePopupElements.performanceSwitch).should('be.checked')
+    cy.get(cookiePopupElements.advertisementSwitch).should('be.checked')
     //assert that others are not checked
-    cy.get('#ckySwitchanalytics, #ckySwitchother').should('not.be.checked')
+    cy.get(cookiePopupElements.analyticsSwitch).should('not.be.checked')
+    cy.get(cookiePopupElements.otherSwitch).should('not.be.checked')
 })
 
-/////////////CAR PAGE/////////////
-Cypress.Commands.add('checkMainpage', () => {
-    cy.title().should('eq', quickQuoteLanding.pageTitle)
+////////////////////////////////////CAR PAGE//////////////////////////////////////////
+Cypress.Commands.add('addPlateNumber', () => {
+    cy.get
 })

@@ -26,8 +26,10 @@ beforeEach(() => {
     expect(err.message).to.include('Ignoring error for now')
     return false
   })
+  let baseUrl = Cypress.config().baseUrl
+  cy.visit(baseUrl)
+  })
   // cy.task('log', 'Before Hook')
-})
 
 after(() => {
   // cy.log('Global After Hook')

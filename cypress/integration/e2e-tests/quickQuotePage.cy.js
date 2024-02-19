@@ -1,11 +1,7 @@
-import { quickQuoteLanding, cookiePopupTexts, cookiePopupElements } from '../../support/page_objects'
 import '../../support/commands'
 
-describe('Test quick quote page', () => {
-    let baseUrl = Cypress.config().baseUrl
-    beforeEach(() => {
-        cy.visit(baseUrl)
-    })
+describe.skip('Test cookies', () => {
+
     it('Check if cookie popup is appeared', () => {
         cy.cookiePopup()
     })
@@ -15,9 +11,24 @@ describe('Test quick quote page', () => {
         cy.verifyCustsomizedCookies()
     })
 
-    it('CAR page', () => {
-        cy.get('.car-wrapper').should('contain', 'Enter your registration number.')
-        
+    it('Accept all cookies', () => {
+        cy.acceptCookies()
+        cy.verifyAcceptedCookies()
     })
 
+    it('Reject all cookies', () => {
+        cy.rejectCookies()
+        cy.verifyRejectedCookies()
+    })
 })
+
+describe('Test the quote process', () => {
+
+    it('CAR page', () => {
+        cy.acceptCookies()
+        cy.get('.car-wrapper').should('contain', 'Enter your registration number.')
+        cy.get('#reg').should('be.enabled').type('.')
+    })
+})
+
+
