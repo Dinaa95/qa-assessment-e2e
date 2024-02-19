@@ -89,5 +89,24 @@ Cypress.Commands.add('checkCarData', () => {
 })
 
 Cypress.Commands.add('carModifications', () => {
-    
+    //click yes and check if modifications appear
+    cy.get(carPageElements.modificationButtons).contains('NO').should('be.visible')
+    cy.get(carPageElements.modificationButtons).contains('YES').click()
+    cy.get(carPageElements.modificationButtons).contains('YES').invoke('css', 'color').should('eq', carPageElements.choosenButtonTextColour)
+    cy.get(carPageElements.modificationCards).should('have.length', 4)
+    cy.get(carPageElements.modificationNotListed).contains('Not listed above').should('be.visible')
+    //click no and modifications should not appear
+    cy.get(carPageElements.modificationButtons).contains('NO').click()
+    cy.get(carPageElements.modificationCards).should('not.have.length')
+})
+
+Cypress.Commands.add('carHistory', () => {
+    cy.get(carPageElements.confirmPurchaseDateContainer).should('contain', opelCarData.yearOfManufacture)
+    cy.get(carPageElements.dateConfirmButtons).contains('YES').should('be.visible')
+    cy.get(carPageElements.dateConfirmButtons).contains('NO').click()
+    cy.get(carPageElements.addCustomPurchaseDate).should('be.visible')
+    cy.get(carPageElements.legalOwnerDropdownTrigger).click()
+    //notworking
+    cy.get(carPageElements.legalOwnerDropdownOptions).should('contain', 'Civil partner').and('have.lenght', 7)
+
 })

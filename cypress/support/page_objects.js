@@ -41,12 +41,21 @@ export const carPageElements = {
   carGeneralContainer: '[data-cy="car-info-container"]',
   carName: '.car-name',
   plateNumberDiv: 'car-view-section car-reg is-tablet',
+  choosenButtonTextColour: 'rgb(255, 255, 255)',
   //modification container
   modificationContainer: '#hasModifications',
+  modificationButtons: '[data-cy="has-modifications-toggle"]',
+  modificationCards: '.option-card',
+  modificationNotListed: '.not-listed',
   //history contanier
   historyContainer: '.sc-hZFzCs cAxUep',
   confirmPurchaseDateContainer: '#confirmPurchaseDate',
+  dateConfirmButtons: '[data-cy="purchase-date-toggle"]',
+  addCustomPurchaseDate:'#customPurchaseDate',
   legalOwnerContainer: '#legalOwner',
+  legalOwnerDropdownTrigger: '[data-cy="car-owner-dropdown-list"]',
+  legalOwnerDropdownOptions: '#react-select-2-option',
+//  legalOwnerDropdownMenu: '.css-1r5hf38-menu',
   keeperContainer: '#keeper',
   parkAtHomeContainer: '#parkedAtHome',
   //mileage container
