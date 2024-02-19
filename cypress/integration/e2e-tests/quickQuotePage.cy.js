@@ -25,9 +25,8 @@ describe.skip('Test cookies', () => {
 describe('Test the quote process', () => {
 
     it('CAR page', () => {
-        cy.acceptCookies()
-        cy.get('.car-wrapper').should('contain', 'Enter your registration number.')
-        cy.get('#reg').should('be.enabled').type('.')
+        cy.addPlateNumber()
+        cy.checkCarData()
     })
 })
 

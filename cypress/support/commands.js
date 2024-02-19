@@ -1,5 +1,5 @@
-import { basicPageElements, cookiePopupElements, cookiePopupTexts } from '../support/page_objects'
-import { inputData } from '../support/input_data'
+import { basicPageElements, addPlatePageElements, cookiePopupElements, cookiePopupTexts, carPageElements } from '../support/page_objects'
+import { opelCarData } from './data'
 
 
 Cypress.Commands.add('checkMainpage', () => {
@@ -65,5 +65,29 @@ Cypress.Commands.add('verifyCustsomizedCookies', () => {
 
 ////////////////////////////////////CAR PAGE//////////////////////////////////////////
 Cypress.Commands.add('addPlateNumber', () => {
-    cy.get
+    cy.acceptCookies()
+    cy.get(addPlatePageElements.carContainer).should('contain', addPlatePageElements.carRegNumberText)
+    cy.get(addPlatePageElements.regNumberField).should('be.enabled').type(opelCarData.plateNumber)
+    cy.get(addPlatePageElements.infoButton).click()
+    cy.get(addPlatePageElements.infoPopup).should('be.visible')
+    cy.get(addPlatePageElements.findCarButton).click()
+})
+
+Cypress.Commands.add('checkCarData', () => {
+    const propertiesToCheck = [
+        'carName',
+        'yearOfManufacture',
+        'transmissionType',
+        'imported',
+        'engineSize',
+        'fuelType',
+        'steering',
+    ];
+    propertiesToCheck.forEach((property) => {
+        cy.get(carPageElements.carGeneralContainer).should('contain', opelCarData[property])
+    })
+})
+
+Cypress.Commands.add('carModifications', () => {
+    
 })

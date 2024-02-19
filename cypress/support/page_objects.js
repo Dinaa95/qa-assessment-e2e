@@ -27,10 +27,32 @@ export const cookiePopupElements = {
   otherSwitch: '#ckySwitchother',
 };
 
-export const carPageElements = {
-  carApplet: '.car-wrapper',
+export const addPlatePageElements = {
+  carContainer: '.car-wrapper',
   carRegNumberText: 'Enter your registration number.',
-  RegNumberField: '#reg',
+  regNumberField: '#reg',
   findCarButton: '[data-cy="find-car-button"]',
+  infoButton: '.info_icon',
   infoPopup: '[type="info"]',
+}
+
+export const carPageElements = {
+  //car data
+  carGeneralContainer: '[data-cy="car-info-container"]',
+  carName: '.car-name',
+  plateNumberDiv: 'car-view-section car-reg is-tablet',
+  //modification container
+  modificationContainer: '#hasModifications',
+  //history contanier
+  historyContainer: '.sc-hZFzCs cAxUep',
+  confirmPurchaseDateContainer: '#confirmPurchaseDate',
+  legalOwnerContainer: '#legalOwner',
+  keeperContainer: '#keeper',
+  parkAtHomeContainer: '#parkedAtHome',
+  //mileage container
+  estimatedMileageInput: '[data-cy="car-mileage-input-text-field"]',
+  //continue
+  continueButton: '[data-cy="continue-driver-button"]',
+
+
 }
