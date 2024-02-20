@@ -36,7 +36,7 @@ export const addPlatePageElements = {
   infoPopup: '[type="info"]',
 }
 
-export const expectedDropdownOptions = [
+export const carExpectedDropdownOptions = [
   'Policyholder (me)', 'Spouse', 'Civil partner', 'Common-law partner', 'Leased to one of the above', 'A parent or guardian', 'Other'
 ]
 
@@ -56,7 +56,7 @@ export const carPageElements = {
   //purchase date
   confirmPurchaseDateContainer: '#confirmPurchaseDate',
   dateConfirmButtons: '[data-cy="purchase-date-toggle"]',
-  addCustomPurchaseDate:'#customPurchaseDate',
+  addCustomPurchaseDate: '#customPurchaseDate',
   //general dropdown elements
   dropdownMenu: 'div.css-1r5hf38-menu',
   dropdownContainer: 'div.css-11unzgr',
@@ -71,10 +71,39 @@ export const carPageElements = {
   keeperPolicyHolderOption: '#react-select-3-option-0',
   //park at home option
   parkAtHomeButtons: '[data-cy="is-parked-home-toggle"]',
+  addPostcode: '[data-cy="parked-location-postcode-input-text-field"]',
   //mileage container
   estimatedMileageInput: '#estimated-mileage',
   //continue
   continueButton: '[data-cy="continue-driver-button"]',
+}
 
+export const nameExpectedDropdownOptions = [
+  'Mr', 'Mrs', 'Miss', 'Ms', 'Mx', 'Dr',
+]
 
+export const driverPageElements = {
+  //general dropdown elements
+  dropdownMenu: 'div.css-1r5hf38-menu',
+  dropdownContainer: 'div.css-11unzgr',
+  dropdownOptions: 'div.css-1x7e2kq-option',
+  //title dropdown
+  nameTitleDropdownTrigger: '[data-cy="title-dropdown-list"]',
+  mrsTitleOption: '#react-select-5-option-1',
+  //name inputs
+  firstNameInput: '#first-name',
+  lastNameInput: '#last-name',
+  //birthday inputs
+  dayOfBirthInput: '#day',
+  monthOfBirthInput: '#month',
+  yearOfBirthInput: '#year',
+  //live in the UK
+  liveInTheUkButtons: '[data-cy="uk-born-toggle"]',
+  spentInTheUkContainer: '#residencyDate',
+  //kids under 16
+  haveKidsDropdownTrigger: '[data-cy="children-under-16-dropdown-list"]',
+  oneKidOption: '#react-select-2-option-1',
+  //postcode
+  postcodeInput: '[data-cy="home-address-postcode-input-field"]',
+  findAddressButton: '[data-cy="home-address-find-address-button"]',
 }

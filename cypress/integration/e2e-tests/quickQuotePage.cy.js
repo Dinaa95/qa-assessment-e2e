@@ -24,7 +24,8 @@ describe.skip('Test cookies', () => {
 
 describe('Test the quote process', () => {
 
-    it('CAR page', () => {
+    it('E2E', () => {
+        //CAR PAGE
         cy.addPlateNumber()
         cy.checkCarData()
         cy.carModifications()
@@ -34,7 +35,10 @@ describe('Test the quote process', () => {
         cy.carHomeParking()
         cy.carEstimatedMileage()
         cy.carClickContinue()
+        //DRIVER PAGE
+        cy.driverName()
     })
 })
+
 
 

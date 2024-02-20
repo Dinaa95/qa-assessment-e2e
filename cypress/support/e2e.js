@@ -20,12 +20,15 @@ import './commands'
 // require('./commands')
 
 // Temporary fix for Trustpilot fireing with errors in test
+
 beforeEach(() => {
+
   cy.clearCookies()
   cy.on('uncaught:exception', err => {
     expect(err.message).to.include('Ignoring error for now')
     return false
   })
+
   let baseUrl = Cypress.config().baseUrl
   cy.visit(baseUrl)
   })

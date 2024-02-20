@@ -1,5 +1,9 @@
-import { basicPageElements, addPlatePageElements, cookiePopupElements, cookiePopupTexts, carPageElements, expectedDropdownOptions } from '../support/page_objects'
-import { opelCarData } from './data'
+import {
+    basicPageElements, cookiePopupElements, cookiePopupTexts,
+    addPlatePageElements, carPageElements, carExpectedDropdownOptions, 
+    driverPageElements, nameExpectedDropdownOptions
+} from '../support/page_objects'
+import { opelCarData, inputData } from './data'
 
 
 Cypress.Commands.add('checkMainpage', () => {
@@ -114,7 +118,7 @@ Cypress.Commands.add('carLegalOwner', () => {
     cy.get(carPageElements.dropdownMenu).should('be.visible')
     cy.get(carPageElements.dropdownMenu).find(carPageElements.dropdownContainer).should(optionsContainer => {
         const actualText = optionsContainer.text();
-        expectedDropdownOptions.forEach(expectedText => {
+        carExpectedDropdownOptions.forEach(expectedText => {
             expect(actualText).to.include(expectedText)
         })
     })
@@ -129,7 +133,7 @@ Cypress.Commands.add('carKeeper', () => {
     cy.get(carPageElements.dropdownMenu).should('be.visible')
     cy.get(carPageElements.dropdownMenu).find(carPageElements.dropdownContainer).should(optionsContainer => {
         const actualText = optionsContainer.text();
-        expectedDropdownOptions.forEach(expectedText => {
+        carExpectedDropdownOptions.forEach(expectedText => {
             expect(actualText).to.include(expectedText)
         })
     })
@@ -138,8 +142,10 @@ Cypress.Commands.add('carKeeper', () => {
 })
 
 Cypress.Commands.add('carHomeParking', () => {
-    cy.get(carPageElements.parkAtHomeButtons).contains('NO').should('be.visible')
+    cy.get(carPageElements.parkAtHomeButtons).contains('NO').should('be.visible').click()
+    cy.get(carPageElements.addPostcode).should('be.visible')
     cy.get(carPageElements.parkAtHomeButtons).contains('YES').click()
+    cy.get(carPageElements.addPostcode).should('not.exist')
 })
 
 Cypress.Commands.add('carEstimatedMileage', () => {
@@ -150,4 +156,38 @@ Cypress.Commands.add('carEstimatedMileage', () => {
 Cypress.Commands.add('carClickContinue', () => {
     //click on continue
     cy.get(carPageElements.continueButton).click()
+})
+
+
+////////////////////////////////////CAR PAGE//////////////////////////////////////////
+Cypress.Commands.add('driverName', () => {
+    //title dropdown
+    cy.get(driverPageElements.nameTitleDropdownTrigger).click()
+    cy.get(driverPageElements.dropdownMenu).should('be.visible')
+    cy.get(driverPageElements.dropdownMenu).find(driverPageElements.dropdownContainer).should(optionsContainer => {
+        const actualText = optionsContainer.text();
+        nameExpectedDropdownOptions.forEach(expectedText => {
+            expect(actualText).to.include(expectedText)
+        })
+    })
+    cy.get(driverPageElements.dropdownContainer).contains(inputData.nameTitle).click()
+    //type name
+    cy.get(driverPageElements.firstNameInput).should('be.enabled').type(inputData.firstName)
+    cy.get(driverPageElements.lastNameInput).should('be.enabled').type(inputData.lastName)
+    //type date of birth
+    cy.get(driverPageElements.dayOfBirthInput).type(inputData.dayOfBirth)
+    cy.get(driverPageElements.monthOfBirthInput).type(inputData.monthOfBirth)
+    cy.get(driverPageElements.yearOfBirthInput).type(inputData.yearOfBirth)
+    //live in UK
+    cy.get(driverPageElements.liveInTheUkButtons).contains('NO').click()
+    cy.get(driverPageElements.spentInTheUkContainer).should('be.visible')
+    cy.get(driverPageElements.liveInTheUkButtons).contains('YES').click()
+    cy.get(driverPageElements.spentInTheUkContainer).should('not.exist')
+    //kids under 16
+    cy.get(driverPageElements.haveKidsDropdownTrigger).click()
+    cy.get(driverPageElements.dropdownMenu).should('be.visible')
+    cy.get(driverPageElements.oneKidOption).click()
+    //postcode
+    cy.get(driverPageElements.findAddressButton).should('be.disabled')
+    cy.get(driverPageElements.postcodeInput).type(inputData.postCode)
 })
