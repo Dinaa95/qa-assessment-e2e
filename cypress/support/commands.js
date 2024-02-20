@@ -1,4 +1,4 @@
-import { basicPageElements, addPlatePageElements, cookiePopupElements, cookiePopupTexts, carPageElements } from '../support/page_objects'
+import { basicPageElements, addPlatePageElements, cookiePopupElements, cookiePopupTexts, carPageElements, expectedDropdownOptions } from '../support/page_objects'
 import { opelCarData } from './data'
 
 
@@ -101,12 +101,53 @@ Cypress.Commands.add('carModifications', () => {
 })
 
 Cypress.Commands.add('carHistory', () => {
+    //confirm purchase date
     cy.get(carPageElements.confirmPurchaseDateContainer).should('contain', opelCarData.yearOfManufacture)
     cy.get(carPageElements.dateConfirmButtons).contains('YES').should('be.visible')
     cy.get(carPageElements.dateConfirmButtons).contains('NO').click()
     cy.get(carPageElements.addCustomPurchaseDate).should('be.visible')
-    cy.get(carPageElements.legalOwnerDropdownTrigger).click()
-    //notworking
-    cy.get(carPageElements.legalOwnerDropdownOptions).should('contain', 'Civil partner').and('have.lenght', 7)
+})
 
+Cypress.Commands.add('carLegalOwner', () => {
+    //check legal owner dropdown, select policy holder option
+    cy.get(carPageElements.legalOwnerDropdownTrigger).click()
+    cy.get(carPageElements.dropdownMenu).should('be.visible')
+    cy.get(carPageElements.dropdownMenu).find(carPageElements.dropdownContainer).should(optionsContainer => {
+        const actualText = optionsContainer.text();
+        expectedDropdownOptions.forEach(expectedText => {
+            expect(actualText).to.include(expectedText)
+        })
+    })
+    cy.get(carPageElements.dropdownOptions).should('have.length', 6)
+    //only 6 because as we click on the trigger, the PolicyHolder is selected as def --> it has diff class now
+    cy.get(carPageElements.ownerPolicyHolderOption).click()
+})
+
+Cypress.Commands.add('carKeeper', () => {
+    //check registered owner dropdown, select policy holder option
+    cy.get(carPageElements.keeperDropdownTrigger).click()
+    cy.get(carPageElements.dropdownMenu).should('be.visible')
+    cy.get(carPageElements.dropdownMenu).find(carPageElements.dropdownContainer).should(optionsContainer => {
+        const actualText = optionsContainer.text();
+        expectedDropdownOptions.forEach(expectedText => {
+            expect(actualText).to.include(expectedText)
+        })
+    })
+    cy.get(carPageElements.dropdownOptions).should('have.length', 6)
+    cy.get(carPageElements.keeperPolicyHolderOption).click()
+})
+
+Cypress.Commands.add('carHomeParking', () => {
+    cy.get(carPageElements.parkAtHomeButtons).contains('NO').should('be.visible')
+    cy.get(carPageElements.parkAtHomeButtons).contains('YES').click()
+})
+
+Cypress.Commands.add('carEstimatedMileage', () => {
+    //type estimated mileage
+    cy.get(carPageElements.estimatedMileageInput).should('be.enabled').type(opelCarData.estimatedMileage)
+})
+
+Cypress.Commands.add('carClickContinue', () => {
+    //click on continue
+    cy.get(carPageElements.continueButton).click()
 })

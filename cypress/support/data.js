@@ -12,6 +12,6 @@ export const opelCarData = {
     engineSize: '1399cc',
     fuelType: 'Petrol',
     steering: 'Right-hand',
-
+    estimatedMileage: '10000',
 
 }

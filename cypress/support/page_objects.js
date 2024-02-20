@@ -36,6 +36,10 @@ export const addPlatePageElements = {
   infoPopup: '[type="info"]',
 }
 
+export const expectedDropdownOptions = [
+  'Policyholder (me)', 'Spouse', 'Civil partner', 'Common-law partner', 'Leased to one of the above', 'A parent or guardian', 'Other'
+]
+
 export const carPageElements = {
   //car data
   carGeneralContainer: '[data-cy="car-info-container"]',
@@ -49,17 +53,26 @@ export const carPageElements = {
   modificationNotListed: '.not-listed',
   //history contanier
   historyContainer: '.sc-hZFzCs cAxUep',
+  //purchase date
   confirmPurchaseDateContainer: '#confirmPurchaseDate',
   dateConfirmButtons: '[data-cy="purchase-date-toggle"]',
   addCustomPurchaseDate:'#customPurchaseDate',
+  //general dropdown elements
+  dropdownMenu: 'div.css-1r5hf38-menu',
+  dropdownContainer: 'div.css-11unzgr',
+  dropdownOptions: 'div.css-1x7e2kq-option',
+  //legal owner
   legalOwnerContainer: '#legalOwner',
   legalOwnerDropdownTrigger: '[data-cy="car-owner-dropdown-list"]',
-  legalOwnerDropdownOptions: '#react-select-2-option',
-//  legalOwnerDropdownMenu: '.css-1r5hf38-menu',
+  ownerPolicyHolderOption: '#react-select-2-option-0',
+  //registered keeper
   keeperContainer: '#keeper',
-  parkAtHomeContainer: '#parkedAtHome',
+  keeperDropdownTrigger: '[data-cy="car-keeper-dropdown-list"',
+  keeperPolicyHolderOption: '#react-select-3-option-0',
+  //park at home option
+  parkAtHomeButtons: '[data-cy="is-parked-home-toggle"]',
   //mileage container
-  estimatedMileageInput: '[data-cy="car-mileage-input-text-field"]',
+  estimatedMileageInput: '#estimated-mileage',
   //continue
   continueButton: '[data-cy="continue-driver-button"]',
 

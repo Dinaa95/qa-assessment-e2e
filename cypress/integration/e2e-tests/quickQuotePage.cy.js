@@ -26,9 +26,14 @@ describe('Test the quote process', () => {
 
     it('CAR page', () => {
         cy.addPlateNumber()
- //       cy.checkCarData()
- //       cy.carModifications()
+        cy.checkCarData()
+        cy.carModifications()
         cy.carHistory()
+        cy.carLegalOwner()
+        cy.carKeeper()
+        cy.carHomeParking()
+        cy.carEstimatedMileage()
+        cy.carClickContinue()
     })
 })
 
