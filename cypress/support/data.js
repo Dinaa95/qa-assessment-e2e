@@ -6,12 +6,22 @@ export const inputData = {
     dayOfBirth: '07',
     monthOfBirth: '07',
     yearOfBirth: '1997',
-    postCode: 'IV38AU',
+    numberOfKids: '1',
+    postCode: 'IV3 8AU',
+    fullAddress: 'Loch Ness Lodge, Loch Ness Side, Inverness',
     firstAddressLine: 'Loch Ness Lodge',
     secondAddressLine: 'Loch Ness Side',
     city: 'Inverness',
     emailAddress: 'test@test.com',
-    mobileNumber: '01234567890'
+    mobileNumber: '07741157789',
+    employmentStatus: 'Homemaker',
+    drivingLicenceType: 'Full UK Car Licence',
+    yearsOfHavingLicence: '7',
+    yearsOfNoClaimsDiscount: '7',
+    incidentType: 'Windscreen',
+    incidentMonth: '08',
+    incidentYear: '2023',
+    wrongIncidentYear: '2013',
 }
 
 export const opelCarData = {

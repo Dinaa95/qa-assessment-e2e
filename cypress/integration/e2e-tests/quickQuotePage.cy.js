@@ -37,6 +37,20 @@ describe('Test the quote process', () => {
         cy.carClickContinue()
         //DRIVER PAGE
         cy.driverName()
+        cy.driverBirthday()
+        cy.driverInUk()
+        cy.driverHasKids()
+        cy.driverAddress()
+        cy.driverContact()
+        cy.driverMarketing()
+        cy.driverEmployment()
+        cy.driverLicence()
+        cy.driverMedicalCondition()
+        cy.driverInchident()
+        cy.driverConvictions()
+        cy.driverAdd()
+        cy.driverDelete()
+        //COVER PAGE
     })
 })
 

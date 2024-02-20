@@ -1,7 +1,7 @@
 import {
     basicPageElements, cookiePopupElements, cookiePopupTexts,
     addPlatePageElements, carPageElements, carExpectedDropdownOptions, 
-    driverPageElements, nameExpectedDropdownOptions
+    driverPageElements, nameExpectedDropdownOptions, employmentExpDropdownOpt, licenceTypeExpDropdownOpt, incidentTypeExpDropdownOpt
 } from '../support/page_objects'
 import { opelCarData, inputData } from './data'
 
@@ -9,8 +9,9 @@ import { opelCarData, inputData } from './data'
 Cypress.Commands.add('checkMainpage', () => {
     cy.title().should('eq', basicPageElements.pageTitle)
 })
-
+/////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////COOKIES//////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 Cypress.Commands.add('cookiePopup', () => {
     cy.get(cookiePopupElements.mainCookiePopup).should('be.visible')
     cy.get(cookiePopupElements.mainCookieText).should('contain', cookiePopupTexts.cookieText)
@@ -67,7 +68,9 @@ Cypress.Commands.add('verifyCustsomizedCookies', () => {
     cy.get(cookiePopupElements.otherSwitch).should('not.be.checked')
 })
 
-////////////////////////////////////CAR PAGE//////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////CAR PAGE/////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 Cypress.Commands.add('addPlateNumber', () => {
     cy.acceptCookies()
     cy.get(addPlatePageElements.carContainer).should('contain', addPlatePageElements.carRegNumberText)
@@ -158,8 +161,9 @@ Cypress.Commands.add('carClickContinue', () => {
     cy.get(carPageElements.continueButton).click()
 })
 
-
-////////////////////////////////////CAR PAGE//////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////DRIVER PAGE//////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 Cypress.Commands.add('driverName', () => {
     //title dropdown
     cy.get(driverPageElements.nameTitleDropdownTrigger).click()
@@ -174,20 +178,145 @@ Cypress.Commands.add('driverName', () => {
     //type name
     cy.get(driverPageElements.firstNameInput).should('be.enabled').type(inputData.firstName)
     cy.get(driverPageElements.lastNameInput).should('be.enabled').type(inputData.lastName)
+})
+
+Cypress.Commands.add('driverBirthday', () => {
     //type date of birth
     cy.get(driverPageElements.dayOfBirthInput).type(inputData.dayOfBirth)
     cy.get(driverPageElements.monthOfBirthInput).type(inputData.monthOfBirth)
     cy.get(driverPageElements.yearOfBirthInput).type(inputData.yearOfBirth)
+})
+
+Cypress.Commands.add('driverInUk', () => {
     //live in UK
     cy.get(driverPageElements.liveInTheUkButtons).contains('NO').click()
     cy.get(driverPageElements.spentInTheUkContainer).should('be.visible')
     cy.get(driverPageElements.liveInTheUkButtons).contains('YES').click()
     cy.get(driverPageElements.spentInTheUkContainer).should('not.exist')
+})
+
+Cypress.Commands.add('driverHasKids', () => {
     //kids under 16
     cy.get(driverPageElements.haveKidsDropdownTrigger).click()
     cy.get(driverPageElements.dropdownMenu).should('be.visible')
-    cy.get(driverPageElements.oneKidOption).click()
-    //postcode
+    cy.get(driverPageElements.dropdownContainer).contains(inputData.numberOfKids).click()
+})
+
+Cypress.Commands.add('driverAddress', () => {
+    //add address
     cy.get(driverPageElements.findAddressButton).should('be.disabled')
     cy.get(driverPageElements.postcodeInput).type(inputData.postCode)
+    cy.get(driverPageElements.findAddressButton).click()
+    cy.get(driverPageElements.addressDropdownTrigger).should('be.visible').click()
+    cy.get(driverPageElements.dropdownContainer).contains(inputData.fullAddress).click()
+    cy.get(driverPageElements.addressContainer).should('contain', inputData.firstAddressLine)
+      .and('contain', inputData.secondAddressLine).and('contain', inputData.city).and('contain', inputData.postCode)
+    cy.get(driverPageElements.editAddressButton).should('be.visible').and('be.enabled')
+})
+
+Cypress.Commands.add('driverContact', () => {
+    //add email and Mobile Number
+    cy.get(driverPageElements.emailInput).type(inputData.emailAddress)
+    cy.get(driverPageElements.mobileInput).type(inputData.mobileNumber)
+})
+
+Cypress.Commands.add('driverMarketing', () => {
+    //allow marketing offers
+    cy.get(driverPageElements.offerContactByEmailSwitch).click().should('have.class', 'active')
+    cy.get(driverPageElements.offerContactByPostSwitch).should('not.have.class', 'active')
+    cy.get(driverPageElements.offerContactByPhoneSwitch).should('not.have.class', 'active')
+})
+
+Cypress.Commands.add('driverEmployment', () => {
+    cy.get(driverPageElements.employmentDropdownTrigger).click()
+    cy.get(driverPageElements.dropdownMenu).find(driverPageElements.dropdownContainer).should(optionsContainer => {
+        const actualText = optionsContainer.text();
+        employmentExpDropdownOpt.forEach(expectedText => {
+            expect(actualText).to.include(expectedText)
+        })
+    })
+    //when select Self employed, 2 more option should appear
+    cy.get(driverPageElements.dropdownContainer).contains('Self employed').click()
+    cy.get(driverPageElements.selfEmployedIndustryInput).should('be.visible')
+    cy.get(driverPageElements.selfEmployedOccupationInput).should('be.visible')
+    //select actual employment status
+    cy.get(driverPageElements.employmentDropdownTrigger).click()
+    cy.get(driverPageElements.dropdownContainer).contains(inputData.employmentStatus).click()
+})
+
+Cypress.Commands.add('driverLicence', () => {
+    //check dropdown and select the type of driving licence
+    cy.get(driverPageElements.licenceTypeDropdownTrigger).click()
+    cy.get(driverPageElements.dropdownMenu).find(driverPageElements.dropdownContainer).should(optionsContainer => {
+        const actualText = optionsContainer.text();
+        licenceTypeExpDropdownOpt.forEach(expectedText => {
+            expect(actualText).to.include(expectedText)
+        })
+    })
+    cy.get(driverPageElements.dropdownContainer).contains(inputData.drivingLicenceType).click()
+    //select the years of having driving licence
+    cy.get(driverPageElements.licenceAgeDropdownTrigger).click()
+    cy.get(driverPageElements.dropdownContainer).contains(inputData.yearsOfHavingLicence).click()
+    //select no claims discount years
+    cy.get(driverPageElements.licenceNoClaimDiscountTrigger).click()
+    cy.get(driverPageElements.dropdownContainer).contains(inputData.yearsOfNoClaimsDiscount).click()
+})
+
+Cypress.Commands.add('driverMedicalCondition', () => {
+    //check if clicking on YES, the condition is known buttons appear
+    cy.get(driverPageElements.medicalConditionButtons).contains('YES').click()
+    cy.get(driverPageElements.medicalConditionIsKnownButtons).should('be.visible')
+    cy.get(driverPageElements.medicalConditionButtons).contains('NO').click()
+})
+
+Cypress.Commands.add('driverInchident', () => {
+    //click on yes and check the form
+    cy.get(driverPageElements.incidentButtons).contains('YES').click()
+    cy.get(driverPageElements.formTitle).should('be.visible')
+    //select incident type
+    cy.get(driverPageElements.incidentTypeDropDownTrigger).click()
+    cy.get(driverPageElements.dropdownMenu).find(driverPageElements.dropdownContainer).should(optionsContainer => {
+        const actualText = optionsContainer.text();
+        incidentTypeExpDropdownOpt.forEach(expectedText => {
+            expect(actualText).to.include(expectedText)
+        })
+    })
+    cy.get(driverPageElements.dropdownContainer).contains(inputData.incidentType).click()
+    //type incident month and year
+    cy.get(driverPageElements.incidentMonthInput).type(inputData.incidentMonth)
+    cy.get(driverPageElements.incidentYearInput).type(inputData.wrongIncidentYear)
+    // give the right year
+    cy.get(driverPageElements.incidentMonthInput).click()
+    cy.get(driverPageElements.incidentDateError).should('contain.text', 'older than five years old')
+    cy.get(driverPageElements.incidentYearInput).clear().type(inputData.incidentYear)
+    //fauld
+    cy.get(driverPageElements.myFaultButtons).contains('NO').click()
+    //no claims discount
+    cy.get(driverPageElements.loseNoClaimsDiscountButtons).contains('NO').click()
+    //add incident
+    cy.get(driverPageElements.addIncidentButton).click()
+    //check if incident appeared
+    cy.get(driverPageElements.generalAddedBox).invoke('text').should('include', inputData.incidentType)
+})
+
+Cypress.Commands.add('driverConvictions', () => {
+    cy.get(driverPageElements.motoringConvictionButtons).contains('YES').click()
+    cy.get(driverPageElements.formOverlay).should('be.visible')
+    cy.get(driverPageElements.formCancelButton).click()
+    cy.get(driverPageElements.motoringConvictionButtons).contains('NO').invoke('css', 'color').should('eq', driverPageElements.choosenButtonTextColour)
+    cy.get(driverPageElements.anyConvictionButtons).contains('NO').click()
+})
+
+Cypress.Commands.add('driverAdd', () => {
+    cy.get(driverPageElements.addDriverButton).click()
+    cy.get(driverPageElements.formOverlay).should('be.visible').invoke('text').should('include', driverPageElements.addDriverFormTitle)
+    cy.get(driverPageElements.addDriverAgreeCheckbox).check()
+    cy.get(driverPageElements.confirmAddDriverButton).click()
+    cy.get(driverPageElements.firstNameInput).should('have.value', '')
+    cy.get(driverPageElements.lastNameInput).should('have.value', '')
+})
+
+Cypress.Commands.add('driverDelete', () => {
+    cy.get(driverPageElements.removeNewDriverButton).click()
+    cy.get(driverPageElements.confirmRemoveNewDriverButton).click()
 })

@@ -37,7 +37,8 @@ export const addPlatePageElements = {
 }
 
 export const carExpectedDropdownOptions = [
-  'Policyholder (me)', 'Spouse', 'Civil partner', 'Common-law partner', 'Leased to one of the above', 'A parent or guardian', 'Other'
+  'Policyholder (me)', 'Spouse', 'Civil partner', 'Common-law partner',
+  'Leased to one of the above', 'A parent or guardian', 'Other'
 ]
 
 export const carPageElements = {
@@ -79,7 +80,22 @@ export const carPageElements = {
 }
 
 export const nameExpectedDropdownOptions = [
-  'Mr', 'Mrs', 'Miss', 'Ms', 'Mx', 'Dr',
+  'Mr', 'Mrs', 'Miss', 'Ms', 'Mx', 'Dr'
+]
+
+export const employmentExpDropdownOpt = [
+  'Employed', 'Homemaker', 'Independent means', 'Retired', 'Self employed',
+  'In full or part-time education', 'Not employed at the moment'
+]
+
+export const licenceTypeExpDropdownOpt = [
+  'Full EU Licence', 'Full European (Non-EU)', 'Full International Licence', 'Full UK Car Licence',
+  'Medical Restricted (Full) Less Than 3 Years - Car', 'Provisional (UK) Car Licence', 'Provisional EU Licence', 'Other'
+]
+
+export const incidentTypeExpDropdownOpt = [
+  'Accident', 'Misfuelling', 'Weather Damage', 'Fire',
+  'Theft or Attempted Theft', 'Vandalism', 'Windscreen', 'Other'
 ]
 
 export const driverPageElements = {
@@ -103,7 +119,62 @@ export const driverPageElements = {
   //kids under 16
   haveKidsDropdownTrigger: '[data-cy="children-under-16-dropdown-list"]',
   oneKidOption: '#react-select-2-option-1',
-  //postcode
-  postcodeInput: '[data-cy="home-address-postcode-input-field"]',
+  //address
+  postcodeInput: '#find-address',
   findAddressButton: '[data-cy="home-address-find-address-button"]',
+  addressDropdownTrigger: '[data-cy="home-address-dropdown-list"]',
+  addressContainer: '.address-text-container',
+  editAddressButton: '[data-cy="edit-address-button"]',
+  //email
+  emailInput: '#email',
+  //mobile number
+  mobileInput: '#mobile-number',
+  //contacgt with marketing offers
+  offerContactByEmailSwitch: '[data-cy="marketing-email-toggle"]',
+  offerContactByPostSwitch: '[data-cy="marketing-post-toggle"]',
+  offerContactByPhoneSwitch: '[data-cy="marketing-phone-toggle"]',
+  //employment elements
+  employmentDropdownTrigger: '[data-cy="employment-status-dropdown-list"]',
+  selfEmployedIndustryInput: '[placeholder="Business category"]',
+  selfEmployedOccupationInput: '[placeholder="Occupation"]',
+  //driving licence details
+  licenceTypeDropdownTrigger: '[data-cy="licence-type-dropdown-list"]',
+  licenceAgeDropdownTrigger: '[data-cy="licence-date-dropdown-list"]',
+  licenceNoClaimDiscountTrigger: '[data-cy="ncd-date-dropdown-list"]',
+  //medical condition
+  medicalConditionButtons: '[data-cy="has-medical-conditions-toggle"]',
+  medicalConditionIsKnownButtons: '[data-cy="has-informed-dvla-medical-conditions-toggle"]',
+  //accident and claims
+  incidentButtons: '[data-cy="has-claims-toggle"]',
+  //incident form
+  formTitle: '.modal-title',
+  incidentTypeDropDownTrigger: '[data-cy="incident-type-dropdown-list"]',
+  incidentDateError: '.split-date-error',
+  incidentMonthInput: '[data-cy="incident-date-text-field-month"]#month',
+  incidentYearInput: '[data-cy="incident-date-text-field-year"]#year',
+  myFaultButtons: '[data-cy="incident-at-fault-toggle"]',
+  loseNoClaimsDiscountButtons: '[data-cy="lose-no-claims-toggle"]',
+  addIncidentButton: '[data-cy="add-incident-button"]',
+  //added incident
+  generalAddedBox: '.attribute-box',
+  //conviction
+  motoringConvictionButtons: '[data-cy="has-motoring-convictions-toggle"]',
+  formOverlay: '.overlay-wrapper',
+  formCancelButton: '.button-cancel',
+  choosenButtonTextColour: 'rgb(255, 255, 255)',
+  anyConvictionButtons: '[data-cy="has-criminal-convictions-toggle"]',
+  //add driver
+  addDriverButton: '[data-cy="add-additional-driver-button"]',
+  addDriverFormTitle: 'Add additional driver.',
+  addDriverAgreeCheckbox: '.checkbox',
+  confirmAddDriverButton: '[data-cy="confirm-additional-driver-consent"]',
+  //delete driver
+  removeNewDriverButton: '[data-cy="additional-driver-1-remove-button"]',
+  confirmRemoveNewDriverButton: '[data-cy="confirm-remove-additional-driver"]',
+}
+
+export const coverPageElements = {
+  //cover start date
+  startDateDropdownTrigger: '[data-cy="inception-date-dropdown-list"]',
+  
 }
