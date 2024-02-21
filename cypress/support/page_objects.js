@@ -198,7 +198,4 @@ export const coverPageElements = {
   renewalQuoteInput: '#renewal-quote',
   //get quote
   getQuoteButton: '[data-cy="confirm-cover-details"]',
-  
-
-
 }
