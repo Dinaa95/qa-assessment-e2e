@@ -29,18 +29,24 @@ jobs:
       with:
         name: mochawesome-report
         path: cypress/reports/
-      continue-on-error: true
 
     - name: Download and Extract Artifact
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v2
       with:
         name: mochawesome-report
         path: cypress/reports/
+
+    - name: Generate HTML Report
+      run: |
+        npx marge cypress/reports/*.json -o cypress/reports
+        npx marge-report-generator --reportDir=cypress/reports
+
+    - name: Move HTML File
+      run: mv cypress/reports/mochawesome-report/* ./public/
+      working-directory: ./public  # Set the working directory to ./public
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./cypress/reports/
-      continue-on-error: true
-
+        publish_dir: ./public
