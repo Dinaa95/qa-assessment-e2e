@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2024-02-21T20:10:36.462Z",
-    "end": "2024-02-21T20:10:40.075Z",
-    "duration": 3613,
+    "start": "2024-02-21T20:30:00.533Z",
+    "end": "2024-02-21T20:30:03.863Z",
+    "duration": 3330,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "c102ebf4-4c20-4e2c-be0f-dfd9946d48b3",
+      "uuid": "0eae0b73-84da-4ff9-855d-b7d96856a44e",
       "title": "",
       "fullFile": "cypress/integration/e2e-tests/quickQuotePage.cy.js",
       "file": "cypress/integration/e2e-tests/quickQuotePage.cy.js",
@@ -29,7 +29,7 @@
           "title": "test until page is available",
           "fullTitle": "test until page is available",
           "timedOut": null,
-          "duration": 1630,
+          "duration": 1412,
           "state": "passed",
           "speed": "fast",
           "pass": true,
@@ -38,20 +38,20 @@
           "context": null,
           "code": "cy.visit('https://google.com');",
           "err": {},
-          "uuid": "32175a99-e6be-452e-8163-f3e32ccdec4a",
-          "parentUUID": "c102ebf4-4c20-4e2c-be0f-dfd9946d48b3",
+          "uuid": "19c2a143-c299-4950-89a8-24522e87a040",
+          "parentUUID": "0eae0b73-84da-4ff9-855d-b7d96856a44e",
           "isHook": false,
           "skipped": false
         }
       ],
       "suites": [],
       "passes": [
-        "32175a99-e6be-452e-8163-f3e32ccdec4a"
+        "19c2a143-c299-4950-89a8-24522e87a040"
       ],
       "failures": [],
       "pending": [],
       "skipped": [],
-      "duration": 1630,
+      "duration": 1412,
       "root": true,
       "rootEmpty": false,
       "_timeout": 2000
