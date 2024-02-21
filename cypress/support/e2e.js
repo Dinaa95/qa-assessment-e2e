@@ -20,7 +20,7 @@ import './commands'
 // require('./commands')
 
 // Temporary fix for Trustpilot fireing with errors in test
-
+/*
 beforeEach(() => {
 
   cy.clearCookies()
@@ -37,3 +37,4 @@ beforeEach(() => {
 after(() => {
   // cy.log('Global After Hook')
 })
+*/
