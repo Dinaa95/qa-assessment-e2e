@@ -37,9 +37,7 @@ jobs:
         path: cypress/reports/
 
     - name: Generate HTML Report
-      run: |
-        npx marge cypress/reports/*.json -o cypress/reports
-        npx marge-report-generator --reportDir=cypress/reports
+      run: npx marge cypress/reports/*.json -o cypress/reports
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
