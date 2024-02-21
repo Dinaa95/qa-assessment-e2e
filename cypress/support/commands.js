@@ -1,7 +1,9 @@
 import {
     basicPageElements, cookiePopupElements, cookiePopupTexts,
-    addPlatePageElements, carPageElements, carExpectedDropdownOptions, 
-    driverPageElements, nameExpectedDropdownOptions, employmentExpDropdownOpt, licenceTypeExpDropdownOpt, incidentTypeExpDropdownOpt
+    addPlatePageElements, carPageElements, carExpectedDropdownOptions,
+    driverPageElements, nameExpectedDropdownOptions, employmentExpDropdownOpt,
+    licenceTypeExpDropdownOpt, incidentTypeExpDropdownOpt, coverPageElements,
+    excessExpDropdownOpt
 } from '../support/page_objects'
 import { opelCarData, inputData } from './data'
 
@@ -9,9 +11,9 @@ import { opelCarData, inputData } from './data'
 Cypress.Commands.add('checkMainpage', () => {
     cy.title().should('eq', basicPageElements.pageTitle)
 })
-/////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////COOKIES//////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////COOKIES///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Cypress.Commands.add('cookiePopup', () => {
     cy.get(cookiePopupElements.mainCookiePopup).should('be.visible')
     cy.get(cookiePopupElements.mainCookieText).should('contain', cookiePopupTexts.cookieText)
@@ -52,7 +54,8 @@ Cypress.Commands.add('customizeCookies', () => {
     cy.get(cookiePopupElements.customCookiePopup).should('be.visible')
     cy.get(cookiePopupElements.customCookieText).should('contain', cookiePopupTexts.customCookieText)
     //choose some of the settings and save
-    cy.get(`${cookiePopupElements.functionalSwitch}, ${cookiePopupElements.performanceSwitch}, ${cookiePopupElements.advertisementSwitch}`).check()
+    cy.get(`${cookiePopupElements.functionalSwitch}, ${cookiePopupElements.performanceSwitch},
+       ${cookiePopupElements.advertisementSwitch}`).check()
     cy.get(cookiePopupElements.savePreferencesButton).click()
     cy.get(cookiePopupElements.customCookiePopup).should('be.not.visible')
 })
@@ -68,9 +71,9 @@ Cypress.Commands.add('verifyCustsomizedCookies', () => {
     cy.get(cookiePopupElements.otherSwitch).should('not.be.checked')
 })
 
-/////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////CAR PAGE/////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////CAR PAGE//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Cypress.Commands.add('addPlateNumber', () => {
     cy.acceptCookies()
     cy.get(addPlatePageElements.carContainer).should('contain', addPlatePageElements.carRegNumberText)
@@ -99,7 +102,8 @@ Cypress.Commands.add('carModifications', () => {
     //click yes and check if modifications appear
     cy.get(carPageElements.modificationButtons).contains('NO').should('be.visible')
     cy.get(carPageElements.modificationButtons).contains('YES').click()
-    cy.get(carPageElements.modificationButtons).contains('YES').invoke('css', 'color').should('eq', carPageElements.choosenButtonTextColour)
+    cy.get(carPageElements.modificationButtons).contains('YES').invoke('css', 'color')
+        .should('eq', carPageElements.choosenButtonTextColour)
     cy.get(carPageElements.modificationCards).should('have.length', 4)
     cy.get(carPageElements.modificationNotListed).contains('Not listed above').should('be.visible')
     //click no and modifications should not appear
@@ -125,7 +129,7 @@ Cypress.Commands.add('carLegalOwner', () => {
             expect(actualText).to.include(expectedText)
         })
     })
-    cy.get(carPageElements.dropdownOptions).should('have.length', 6)
+    cy.get(basicPageElements.notChosenDropDownOption).should('have.length', 6)
     //only 6 because as we click on the trigger, the PolicyHolder is selected as def --> it has diff class now
     cy.get(carPageElements.ownerPolicyHolderOption).click()
 })
@@ -140,7 +144,7 @@ Cypress.Commands.add('carKeeper', () => {
             expect(actualText).to.include(expectedText)
         })
     })
-    cy.get(carPageElements.dropdownOptions).should('have.length', 6)
+    cy.get(basicPageElements.notChosenDropDownOption).should('have.length', 6)
     cy.get(carPageElements.keeperPolicyHolderOption).click()
 })
 
@@ -161,9 +165,9 @@ Cypress.Commands.add('carClickContinue', () => {
     cy.get(carPageElements.continueButton).click()
 })
 
-/////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////DRIVER PAGE//////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////DRIVER PAGE///////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Cypress.Commands.add('driverName', () => {
     //title dropdown
     cy.get(driverPageElements.nameTitleDropdownTrigger).click()
@@ -210,7 +214,7 @@ Cypress.Commands.add('driverAddress', () => {
     cy.get(driverPageElements.addressDropdownTrigger).should('be.visible').click()
     cy.get(driverPageElements.dropdownContainer).contains(inputData.fullAddress).click()
     cy.get(driverPageElements.addressContainer).should('contain', inputData.firstAddressLine)
-      .and('contain', inputData.secondAddressLine).and('contain', inputData.city).and('contain', inputData.postCode)
+        .and('contain', inputData.secondAddressLine).and('contain', inputData.city).and('contain', inputData.postCode)
     cy.get(driverPageElements.editAddressButton).should('be.visible').and('be.enabled')
 })
 
@@ -303,20 +307,63 @@ Cypress.Commands.add('driverConvictions', () => {
     cy.get(driverPageElements.motoringConvictionButtons).contains('YES').click()
     cy.get(driverPageElements.formOverlay).should('be.visible')
     cy.get(driverPageElements.formCancelButton).click()
-    cy.get(driverPageElements.motoringConvictionButtons).contains('NO').invoke('css', 'color').should('eq', driverPageElements.choosenButtonTextColour)
+    cy.get(driverPageElements.motoringConvictionButtons).contains('NO').invoke('css', 'color')
+        .should('eq', driverPageElements.choosenButtonTextColour)
     cy.get(driverPageElements.anyConvictionButtons).contains('NO').click()
 })
 
 Cypress.Commands.add('driverAdd', () => {
     cy.get(driverPageElements.addDriverButton).click()
-    cy.get(driverPageElements.formOverlay).should('be.visible').invoke('text').should('include', driverPageElements.addDriverFormTitle)
+    cy.get(driverPageElements.formOverlay).should('be.visible').invoke('text')
+        .should('include', driverPageElements.addDriverFormTitle)
     cy.get(driverPageElements.addDriverAgreeCheckbox).check()
     cy.get(driverPageElements.confirmAddDriverButton).click()
     cy.get(driverPageElements.firstNameInput).should('have.value', '')
     cy.get(driverPageElements.lastNameInput).should('have.value', '')
+    cy.get(driverPageElements.addMoreDriversInfoText).should('contain.text', driverPageElements.countOfDriversCanBeAddedText)
 })
 
 Cypress.Commands.add('driverDelete', () => {
     cy.get(driverPageElements.removeNewDriverButton).click()
-    cy.get(driverPageElements.confirmRemoveNewDriverButton).click()
+    cy.get(driverPageElements.confirmRemoveNewDriverButtons).contains(driverPageElements.confirmRemoveButtonText).click()
+})
+
+Cypress.Commands.add('driverClickContinue', () => {
+    //click on continue
+    cy.get(driverPageElements.continueButton).click()
+})
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////COVER PAGE////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Cypress.Commands.add('calculateChosenDate', () => {
+    const currentDate = new Date()
+    currentDate.setDate(currentDate.getDate() + inputData.coverStartDateDelayInDays)
+    const chosenDate = currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    return cy.wrap(chosenDate)
+})
+
+Cypress.Commands.add('cover', () => {
+    //check start date and choose 
+    cy.get(coverPageElements.startDateDropdownTrigger).click()
+    cy.get(basicPageElements.notChosenDropDownOption).should('have.length', 29)
+    cy.get(basicPageElements.chosenDropdownOption).should('have.length', 1)
+    let chosenDate
+    cy.calculateChosenDate()
+        .then(date => {
+            chosenDate = date
+            cy.get(basicPageElements.dropdownContainer).contains(chosenDate).click()
+        })
+    //excess cover with money
+    cy.get(coverPageElements.excessCoverDropdownTrigger).click()
+    cy.get(basicPageElements.dropdownMenu).find(basicPageElements.dropdownContainer).should(optionsContainer => {
+        const actualText = optionsContainer.text();
+        excessExpDropdownOpt.forEach(expectedText => {
+            expect(actualText).to.include(expectedText)
+        })
+    })
+    cy.get(basicPageElements.dropdownContainer).contains(inputData.voluntaryExcessAmount).click()
+    cy.get(coverPageElements.paymentFrequencyButtons).contains(inputData.paymentFrequency.toUpperCase()).click()
+    cy.get(coverPageElements.renewalQuoteInput).should('be.enabled')
 })

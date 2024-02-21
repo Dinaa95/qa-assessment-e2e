@@ -1,6 +1,10 @@
 export const basicPageElements = {
   pageTitle: 'Car | By Miles',
   cookieRevisitButton: '.cky-btn-revisit-wrapper',
+  notChosenDropDownOption: '.css-1x7e2kq-option',
+  chosenDropdownOption: '.css-86fhue-option',
+  dropdownMenu: 'div.css-1r5hf38-menu',
+  dropdownContainer: 'div.css-11unzgr',
 };
 
 export const cookiePopupTexts = {
@@ -61,7 +65,7 @@ export const carPageElements = {
   //general dropdown elements
   dropdownMenu: 'div.css-1r5hf38-menu',
   dropdownContainer: 'div.css-11unzgr',
-  dropdownOptions: 'div.css-1x7e2kq-option',
+  //dropdownOptions: 'div.css-1x7e2kq-option',
   //legal owner
   legalOwnerContainer: '#legalOwner',
   legalOwnerDropdownTrigger: '[data-cy="car-owner-dropdown-list"]',
@@ -89,8 +93,9 @@ export const employmentExpDropdownOpt = [
 ]
 
 export const licenceTypeExpDropdownOpt = [
-  'Full EU Licence', 'Full European (Non-EU)', 'Full International Licence', 'Full UK Car Licence',
-  'Medical Restricted (Full) Less Than 3 Years - Car', 'Provisional (UK) Car Licence', 'Provisional EU Licence', 'Other'
+  'Full EU Licence', 'Full European (Non-EU)', 'Full International Licence',
+  'Full UK Car Licence', 'Medical Restricted (Full) Less Than 3 Years - Car',
+  'Provisional (UK) Car Licence', 'Provisional EU Licence', 'Other'
 ]
 
 export const incidentTypeExpDropdownOpt = [
@@ -102,7 +107,7 @@ export const driverPageElements = {
   //general dropdown elements
   dropdownMenu: 'div.css-1r5hf38-menu',
   dropdownContainer: 'div.css-11unzgr',
-  dropdownOptions: 'div.css-1x7e2kq-option',
+  //dropdownOptions: 'div.css-1x7e2kq-option',
   //title dropdown
   nameTitleDropdownTrigger: '[data-cy="title-dropdown-list"]',
   mrsTitleOption: '#react-select-5-option-1',
@@ -166,15 +171,34 @@ export const driverPageElements = {
   //add driver
   addDriverButton: '[data-cy="add-additional-driver-button"]',
   addDriverFormTitle: 'Add additional driver.',
-  addDriverAgreeCheckbox: '.checkbox',
+  addDriverAgreeCheckbox: '[data-cy="additional-driver-consent-checkbox"]',
   confirmAddDriverButton: '[data-cy="confirm-additional-driver-consent"]',
+  addMoreDriversInfoText: '.add-driver-info',
+  countOfDriversCanBeAddedText: 'You can add 2 more drivers to your policy.',
   //delete driver
   removeNewDriverButton: '[data-cy="additional-driver-1-remove-button"]',
-  confirmRemoveNewDriverButton: '[data-cy="confirm-remove-additional-driver"]',
+  confirmRemoveNewDriverButtons: '[data-cy="confirm-remove-additional-driver"]',
+  confirmRemoveButtonText: 'Remove driver',
+  continueButton: '[data-cy="continue-cover-button"]',
 }
+
+export const excessExpDropdownOpt = [
+  '£0', '£50', '£100', '£150', '£200', '£250', '£300', '£350', '£400',
+  '£450', '£500', '£600', '£700', '£800', '£900', '£1000'
+]
 
 export const coverPageElements = {
   //cover start date
   startDateDropdownTrigger: '[data-cy="inception-date-dropdown-list"]',
+  //excess cover with money
+  excessCoverDropdownTrigger: '[data-cy="voluntary-excess-dropdown-list"]',
+  //payment frequency
+  paymentFrequencyButtons: '[data-cy="payment-frequency-toggle"]',
+  //renewal quote
+  renewalQuoteInput: '#renewal-quote',
+  //get quote
+  getQuoteButton: '[data-cy="confirm-cover-details"]',
   
+
+
 }

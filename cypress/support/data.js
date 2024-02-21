@@ -1,5 +1,4 @@
 export const inputData = {
-    plateNumber: 'AB12CDE',
     nameTitle: 'Mrs',
     firstName: 'Aurora',
     lastName: 'Swift',
@@ -22,6 +21,9 @@ export const inputData = {
     incidentMonth: '08',
     incidentYear: '2023',
     wrongIncidentYear: '2013',
+    coverStartDateDelayInDays: 5,
+    voluntaryExcessAmount: 200,
+    paymentFrequency: 'Monthly'
 }
 
 export const opelCarData = {

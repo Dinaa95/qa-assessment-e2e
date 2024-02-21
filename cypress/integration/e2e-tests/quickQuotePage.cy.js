@@ -50,7 +50,9 @@ describe('Test the quote process', () => {
         cy.driverConvictions()
         cy.driverAdd()
         cy.driverDelete()
+        cy.driverClickContinue()
         //COVER PAGE
+        cy.cover()
     })
 })
 
