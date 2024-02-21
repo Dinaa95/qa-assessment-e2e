@@ -21,10 +21,13 @@ module.exports = defineConfig({
 
   "reporter": "mochawesome",
   "reporterOptions": {
-    "reportDir": "cypress/reports/",
+    "reportDir": "cypress/reports/mochawesome",
     "reportFilename": 'NewReportFile-[datetime]',
-    "overwrite": true,
+    "timestamp": "longDate",
+    "overwrite": false,
     "html": true,
-    "json": false
+    "json": true,
+    "autoOpen": true,
+    "showHooks": "always",
   }
 })

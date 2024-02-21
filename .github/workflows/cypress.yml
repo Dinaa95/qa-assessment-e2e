@@ -24,11 +24,14 @@ jobs:
     - name: Run Cypress tests
       run: npm run cy:run
 
+
     - name: Generate Mochawesome report
-      run: npm run generate-mochawesome-report
+      run: |
+        npx marge cypress/reports/*.json -o cypress/reports
+        npx marge-report-generator --reportDir=cypress/reports
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: mochawesome-report
-        path: cypress/reports/mochawesome
+        path: cypress/reports/
