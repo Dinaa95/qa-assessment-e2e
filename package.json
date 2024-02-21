@@ -7,7 +7,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "cy:run": "cypress run",
-    "generate-mochawesome-report": "marge cypress/reports/mochawesome/*.json --reportDir cypress/reports/mochawesome"
+    "generate-report": "marge cypress/reports/mochawesome/*.json -f report -o cypress/reports/mochawesome"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": false

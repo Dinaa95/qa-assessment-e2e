@@ -21,7 +21,7 @@ module.exports = defineConfig({
 
   "reporter": "mochawesome",
   "reporterOptions": {
-    "reportDir": "cypress/reports/mochawesome",
+    "reportDir": "cypress/reports/mocha",
     "reportFilename": 'NewReportFile-[datetime]',
     "timestamp": "longDate",
     "overwrite": false,
