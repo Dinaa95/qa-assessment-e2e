@@ -1,6 +1,6 @@
 import '../../support/commands'
 
-describe.skip('Test cookies', () => {
+describe('Test cookies', () => {
 
     it('Check if cookie popup is appeared', () => {
         cy.cookiePopup()
@@ -50,21 +50,38 @@ describe('Test the quote process', () => {
         cy.driverName()
         //Type birthday
         cy.driverBirthday()
-        //
+        //Answer the question, if NO --> additional dropdown
         cy.driverInUk()
+        //Select number of kids
         cy.driverHasKids()
+        //Provide postcode and check the address
         cy.driverAddress()
+        //Add email and phone number
         cy.driverContact()
+        //Accept email marketing
         cy.driverMarketing()
+        //Add employment status
         cy.driverEmployment()
+        //Select licence type and years of having licence
         cy.driverLicence()
+        //Confirm medical condition, if YES --> is it a known issue
         cy.driverMedicalCondition()
+        //Add an incident
         cy.driverInchident()
+        //Select no convictions
         cy.driverConvictions()
+        //Add an extra driver
         cy.driverAdd()
+        //Delete the extra driver
         cy.driverDelete()
+        //Click on continue
         cy.driverClickContinue()
+
         //COVER PAGE
+        //Select start date by calculate today + 5 days
+        //Excess cover with money
+        //Select payment frequency
+        //Check renewal input
         cy.cover()
     })
 })

@@ -364,6 +364,8 @@ Cypress.Commands.add('cover', () => {
         })
     })
     cy.get(basicPageElements.dropdownContainer).contains(inputData.voluntaryExcessAmount).click()
+    //set payment frequency
     cy.get(coverPageElements.paymentFrequencyButtons).contains(inputData.paymentFrequency.toUpperCase()).click()
+    //check renewal quote input
     cy.get(coverPageElements.renewalQuoteInput).should('be.enabled')
 })
