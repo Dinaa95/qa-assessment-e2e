@@ -40,7 +40,8 @@ jobs:
       run: npx marge cypress/reports/*.json -o cypress/reports
 
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./cypress/reports/
+      run: |
+        shopt -s dotglob
+        cp -r /home/runner/work/qa-test-bymiles/qa-test-bymiles/cypress/reports/* /home/runner/actions_github_pages_1708546242444
+        shopt -u dotglob
+      working-directory: /home/runner/actions_github_pages_1708546242444
