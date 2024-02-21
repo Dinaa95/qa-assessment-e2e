@@ -27,7 +27,5 @@ module.exports = defineConfig({
     "overwrite": false,
     "html": true,
     "json": true,
-    "autoOpen": true,
-    "showHooks": "always",
   }
 })
