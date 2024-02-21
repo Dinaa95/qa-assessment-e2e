@@ -85,6 +85,3 @@ describe('Test the quote process', () => {
         cy.cover()
     })
 })
-
-
-
