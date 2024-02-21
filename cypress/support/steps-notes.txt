@@ -1,0 +1,11 @@
+Before each step: configured cy.visit in the e2e.js
+
+I checked the cookie popup, and explore the different opportunities like
+    - create custom cookie settings
+    - allow all cookies
+    - reject all cookies
+By default, in the E2E testing I automatically allowed all cookies
+What I checked on cookie popup:
+    - 
+
+I started the E2E testing with adding the plate number

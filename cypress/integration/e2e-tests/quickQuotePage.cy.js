@@ -26,6 +26,8 @@ describe('Test the quote process', () => {
 
     it('E2E', () => {
         //CAR PAGE//
+        //Check the webpage title
+        cy.checkMainpage()
         //Accept all cookies and type plate number
         cy.addPlateNumber()
         //Check if all relevant car data appeared on the page
