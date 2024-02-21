@@ -25,19 +25,32 @@ describe.skip('Test cookies', () => {
 describe('Test the quote process', () => {
 
     it('E2E', () => {
-        //CAR PAGE
+        //CAR PAGE//
+        //Accept all cookies and type plate number
         cy.addPlateNumber()
+        //Check if all relevant car data appeared on the page
         cy.checkCarData()
+        //Verify modification YES/NO buttons + YES --> additional options appeared
         cy.carModifications()
+        //Confirm purchase date + NO --> additional input field appeared
         cy.carHistory()
+        //Check legal owner dropdown menu
         cy.carLegalOwner()
+        //Check car keeper dropdown menu
         cy.carKeeper()
+        //Verify that car parking near home if NO --> postal code can be added 
         cy.carHomeParking()
+        //Type estimated mileage
         cy.carEstimatedMileage()
+        //Click on continue button
         cy.carClickContinue()
+
         //DRIVER PAGE
+        //Select name title and type first and last name
         cy.driverName()
+        //Type birthday
         cy.driverBirthday()
+        //
         cy.driverInUk()
         cy.driverHasKids()
         cy.driverAddress()
