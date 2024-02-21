@@ -11,12 +11,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2.4.4  # Use a version that supports Node.js 16
-      with:
-        fetch-depth: 0  # Fetch the complete history
+      uses: actions/checkout@v2
 
     - name: Setup Node.js
-      uses: actions/setup-node@v4  # Use a version that supports Node.js 16
+      uses: actions/setup-node@v4
       with:
         node-version: '16'
 
