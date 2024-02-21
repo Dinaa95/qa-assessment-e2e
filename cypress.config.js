@@ -14,7 +14,6 @@ module.exports = defineConfig({
       return require('./cypress/plugins/index.js')(on, config)
     },
     baseUrl: 'https://quote.test.bymiles.co.uk',
-    //baseUrl: 'https://checkout.bymiles.co.uk/details/car',
     specPattern: 'cypress/integration/e2e-tests'
     //  specPattern: 'cypress/integration/e2e-tests/**/*.feature',
   },
