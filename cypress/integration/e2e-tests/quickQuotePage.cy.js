@@ -1,6 +1,6 @@
 import '../../support/commands'
 
-describe.skip('Test cookies', () => {
+describe('Test cookies', () => {
 
     it('Check if cookie popup is appeared', () => {
         cy.cookiePopup()
