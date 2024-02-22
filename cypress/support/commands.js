@@ -3,7 +3,7 @@ import {
     addPlatePageElements, carPageElements, carExpectedDropdownOptions,
     driverPageElements, nameExpectedDropdownOptions, employmentExpDropdownOpt,
     licenceTypeExpDropdownOpt, incidentTypeExpDropdownOpt, coverPageElements,
-    excessExpDropdownOpt
+    excessExpDropdownOpt, quotePageElements
 } from '../support/page_objects'
 import { opelCarData, inputData } from './data'
 
@@ -369,4 +369,13 @@ Cypress.Commands.add('cover', () => {
     cy.get(coverPageElements.paymentFrequencyButtons).contains(inputData.paymentFrequency.toUpperCase()).click()
     //check renewal quote input
     cy.get(coverPageElements.renewalQuoteInput).should('be.enabled')
+})
+
+Cypress.Commands.add('getQuote', () => {
+    cy.get(coverPageElements.getQuoteButton).click()
+})
+
+Cypress.Commands.add('quotePage', () => {
+    cy.title().should('contain', 'Sorry', { timeout: 10000 })
+    cy.get(quotePageElements.editDetailsButton).should('be.visible')
 })

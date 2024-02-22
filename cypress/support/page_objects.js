@@ -199,3 +199,8 @@ export const coverPageElements = {
   //get quote
   getQuoteButton: '[data-cy="confirm-cover-details"]',
 }
+
+export const quotePageElements ={
+  //edit details button
+  editDetailsButton: '[data-cy="base-button"]',
+}

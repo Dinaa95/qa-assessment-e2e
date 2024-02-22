@@ -85,5 +85,8 @@ describe('Test the quote process', () => {
         //Select payment frequency
         //Check renewal input
         cy.cover()
+        //get quote
+        cy.getQuote()
+        cy.quotePage()
     })
 })
