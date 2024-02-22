@@ -1,10 +1,6 @@
 import '../../support/commands'
 
-it('test until page is available', () => {
-    cy.visit('https://google.com')
-})
-/*
-describe('Test cookies', () => {
+describe.skip('Test cookies', () => {
 
     it('Check if cookie popup is appeared', () => {
         cy.cookiePopup()
@@ -91,4 +87,3 @@ describe('Test the quote process', () => {
         cy.cover()
     })
 })
-*/

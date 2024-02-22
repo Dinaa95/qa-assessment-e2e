@@ -192,7 +192,7 @@ Cypress.Commands.add('driverBirthday', () => {
 })
 
 Cypress.Commands.add('driverInUk', () => {
-    //live in UK
+    //live in UK continuously
     cy.get(driverPageElements.liveInTheUkButtons).contains('NO').click()
     cy.get(driverPageElements.spentInTheUkContainer).should('be.visible')
     cy.get(driverPageElements.liveInTheUkButtons).contains('YES').click()
@@ -279,7 +279,8 @@ Cypress.Commands.add('driverInchident', () => {
     cy.get(driverPageElements.formTitle).should('be.visible')
     //select incident type
     cy.get(driverPageElements.incidentTypeDropDownTrigger).click()
-    cy.get(driverPageElements.dropdownMenu).find(driverPageElements.dropdownContainer).should(optionsContainer => {
+    cy.get(driverPageElements.dropdownMenu).find(driverPageElements.dropdownContainer)
+      .should(optionsContainer => {
         const actualText = optionsContainer.text();
         incidentTypeExpDropdownOpt.forEach(expectedText => {
             expect(actualText).to.include(expectedText)

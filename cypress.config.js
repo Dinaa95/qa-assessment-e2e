@@ -14,6 +14,7 @@ module.exports = defineConfig({
       return require('./cypress/plugins/index.js')(on, config)
     },
     baseUrl: 'https://quote.test.bymiles.co.uk',
+    //baseUrl: 'https://checkout.bymiles.co.uk/details/car',
     specPattern: 'cypress/integration/e2e-tests'
     //  specPattern: 'cypress/integration/e2e-tests/**/*.feature',
   },
@@ -21,8 +22,8 @@ module.exports = defineConfig({
   "reporter": "mochawesome",
   "reporterOptions": {
     "reportDir": "cypress/reports/",
-    "reportFilename": 'NewReportFile-[datetime]',
-    "timestamp": "longDate",
+    "reportFilename": 'Report-[datetime]',
+    "timestamp": "ddd mmm dd yyyy HH:MM",
     "overwrite": false,
     "html": true,
     "json": true,
